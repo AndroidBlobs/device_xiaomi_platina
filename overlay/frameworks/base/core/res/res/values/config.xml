@@ -31,7 +31,7 @@
      <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Boolean indicating if current platform supports HFP inband ringing -->
-     <bool name="config_bluetooth_hfp_inband_ringing_support">false</bool>
+     <bool name="config_bluetooth_hfp_inband_ringing_support">true</bool>
 
     <!-- Boolean indicating if current platform supports BLE peripheral mode -->
      <bool name="config_bluetooth_le_peripheral_mode_supported">true</bool>
@@ -64,6 +64,10 @@
     <!-- Whether the display blanks itself when transition from a doze to a non-doze state -->
      <bool name="config_displayBlanksAfterDoze">true</bool>
 
+    <!-- If true, the doze component is not started until after the screen has been turned off
+         and the screen off animation has been performed. -->
+     <bool name="config_dozeAfterScreenOffByDefault">true</bool>
+
     <!-- Flag specifying whether or not IMS will use the ImsResolver dynamically -->
      <bool name="config_dynamic_bind_ims">true</bool>
 
@@ -95,11 +99,16 @@
     -->
      <bool name="config_enableWifiDisplay">false</bool>
 
+    <!-- Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
+    -->
+     <bool name="config_fillMainBuiltInDisplayCutout">false</bool>
+
     <!-- Is the device capable of hot swapping an ICC Card -->
      <bool name="config_hotswapCapable">true</bool>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-     <bool name="config_intrusiveNotificationLed">false</bool>
+     <bool name="config_intrusiveNotificationLed">true</bool>
 
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
@@ -107,7 +116,10 @@
      <bool name="config_lidControlsSleep">true</bool>
 
     <!-- Should the pinner service pin the Camera application? -->
-     <bool name="config_pinnerCameraApp">true</bool>
+     <bool name="config_pinnerCameraApp">false</bool>
+
+    <!-- Should the pinner service pin the Home application? -->
+     <bool name="config_pinnerHomeApp">false</bool>
 
     <!-- Power Management: Specifies whether to decouple the auto-suspend state of the
          device from the display on/off state.
@@ -138,7 +150,7 @@
          to maximize power savings but not all devices support it.
          Refer to power.h for details.
     -->
-     <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
+     <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently in hardware. -->
      <bool name="config_setColorTransformAccelerated">true</bool>
@@ -151,7 +163,7 @@
      <bool name="config_speed_up_audio_on_mt_calls">true</bool>
 
     <!-- Whether the Unprocessed audio source supports the required frequency range and level -->
-     <bool name="config_supportAudioSourceUnprocessed">false</bool>
+     <bool name="config_supportAudioSourceUnprocessed">true</bool>
 
     <!-- Whether device supports double tap to wake -->
      <bool name="config_supportDoubleTapWake">false</bool>
@@ -169,10 +181,18 @@
     <!-- True if the device supports Sustained Performance Mode-->
      <bool name="config_sustainedPerformanceModeSupported">false</bool>
 
+    <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
+     <bool name="config_swipe_up_gesture_setting_available">false</bool>
+
     <!-- Config determines whether to update phone object when voice registration
          state changes. Voice radio tech change will always trigger an update of
          phone object irrespective of this config -->
      <bool name="config_switch_phone_on_voice_reg_state_change">false</bool>
+
+    <!-- When true, the tethering upstream network follows the current default
+         Internet network (except when the current default network is mobile,
+         in which case a DUN network will be used if required). -->
+     <bool name="config_tether_upstream_automatic">true</bool>
 
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
      <bool name="config_unplugTurnsOnScreen">true</bool>
@@ -205,16 +225,25 @@
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
      <bool name="config_wifi_dual_band_support">true</bool>
 
+    <!-- Boolean indicating whether single radio chain scan results are to be used for network selection -->
+     <bool name="config_wifi_framework_use_single_radio_chain_scan_results_network_selection">true</bool>
+
+    <!-- Enable ACS (auto channel selection) for Wifi hotspot (SAP) -->
+     <bool name="config_wifi_softap_acs_supported">true</bool>
+
+    <!-- Enable 802.11ac for Wifi hotspot (SAP) -->
+     <bool name="config_wifi_softap_ieee80211ac_supported">true</bool>
+
     <!-- Boolean indicating if restoring network selection should be skipped -->
     <!-- The restoring is handled by modem if it is true-->
      <bool name="skip_restoring_network_selection">true</bool>
 
     <!-- Height of the status bar -->
-     <dimen name="status_bar_height_portrait">30.179993dip</dimen>
+     <dimen name="status_bar_height_portrait">24.0dip</dimen>
 
     <!-- The maximum range of gamma adjustment possible using the screen
          auto-brightness adjustment setting. -->
-     <fraction name="config_autoBrightnessAdjustmentMaxGamma">200.0%</fraction>
+     <fraction name="config_autoBrightnessAdjustmentMaxGamma">100.0%</fraction>
 
     <!-- User activity timeout: Maximum screen dim duration as a percentage of screen off timeout.
     
@@ -232,9 +261,6 @@
     -->
      <fraction name="config_maximumScreenDimRatio">29.999996%</fraction>
 
-    <!-- Period of time in which to consider light samples in milliseconds. -->
-     <integer name="config_autoBrightnessAmbientLightHorizon">1000</integer>
-
     <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
          for debouncing the light sensor.  Different constants are used to debounce the light sensor
          when adapting to brighter or darker environments.  This parameter controls how quickly
@@ -247,10 +273,10 @@
      <integer name="config_bluetooth_operating_voltage_mv">3300</integer>
 
     <!-- Fast brightness animation ramp rate in brightness units per second-->
-     <integer name="config_brightness_ramp_rate_fast">200</integer>
+     <integer name="config_brightness_ramp_rate_fast">4933</integer>
 
     <!-- Slow brightness animation ramp rate in brightness units per second-->
-     <integer name="config_brightness_ramp_rate_slow">3</integer>
+     <integer name="config_brightness_ramp_rate_slow">3946</integer>
 
     <!--  Maximum number of supported users -->
      <integer name="config_multiuserMaximumUsers">4</integer>
@@ -264,10 +290,17 @@
     <!-- Default value for led color when battery is medium charged -->
      <integer name="config_notificationsBatteryMediumARGB">0xFFFFFF00</integer>
 
+    <!-- Number of physical SIM slots on the device. This includes both eSIM and pSIM slots, and
+         is not necessarily the same as the number of phones/logical modems supported by the device.
+         For example, a multi-sim device can have 2 phones/logical modems, but 3 physical slots,
+         or a single SIM device can have 1 phones/logical modems, but 2 physical slots (one eSIM
+         and one pSIM) -->
+     <integer name="config_num_physical_slots">1</integer>
+
     <!-- Screen brightness used to dim the screen when the user activity
          timeout expires.  May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-     <integer name="config_screenBrightnessDim">1</integer>
+     <integer name="config_screenBrightnessDim">16</integer>
 
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
@@ -276,19 +309,19 @@
 
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
-     <integer name="config_screenBrightnessSettingDefault">128</integer>
+     <integer name="config_screenBrightnessSettingDefault">2055</integer>
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
-     <integer name="config_screenBrightnessSettingMinimum">0</integer>
+     <integer name="config_screenBrightnessSettingMinimum">15</integer>
 
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
      <integer name="config_shutdownBatteryTemperature">600</integer>
 
     <!-- Integer parameters of the wifi to cellular handover feature
          wifi should not stick to bad networks -->
-     <integer name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-85</integer>
-     <integer name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-82</integer>
+     <integer name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-83</integer>
+     <integer name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-80</integer>
      <integer name="config_wifi_framework_wifi_score_low_rssi_threshold_24GHz">-73</integer>
      <integer name="config_wifi_framework_wifi_score_low_rssi_threshold_5GHz">-70</integer>
 
@@ -300,27 +333,13 @@
          Specify the component name or an empty string if none.
          Note that doze dreams are not subject to the same start conditions as ordinary dreams.
          Doze dreams will run whenever the power manager is in a dozing state. -->
-     <string name="config_dozeComponent">com.android.systemui/com.android.keyguard.doze.DozeService</string>
+     <string name="config_dozeComponent">com.miui.aod/com.miui.aod.doze.DozeService</string>
 
     <!-- Regex of wired ethernet ifaces -->
      <string name="config_ethernet_iface_regex">eth\\d</string>
 
     <!-- ImsService package name to bind to by default, if config_dynamic_bind_ims is true -->
      <string name="config_ims_package">org.codeaurora.ims</string>
-
-    <!-- The bounding path of the cutout region of the main built-in display.
-         Must either be empty if there is no cutout region, or a string that is parsable by
-         {@link android.util.PathParser}.
-    
-         The path is assumed to be specified in display coordinates with pixel units and in
-         the display's native orientation, with the origin of the coordinate system at the
-         center top of the display.
-    
-         To facilitate writing device-independent emulation overlays, the marker `@dp` can be
-         appended after the path string to interpret coordinates in dp instead of px units.
-         Note that a physical cutout should be configured in pixels for the best results.
-    -->
-     <string name="config_mainBuiltInDisplayCutout">M180.535689,0 C169.011598,1.20887355e-06 159.396989,8.80825723 158.40025,20.2875483 C155.219646,56.5845067 127.758935,83 94.8385593,83 L-94.8329761,83 C-127.753352,83 -155.214063,56.5845067 -158.081086,23.7929318 C-159.391406,8.80825723 -169.006015,1.20887355e-06 -180.524506,0 L180.535689,0 Z</string>
 
     <!-- MMS user agent string -->
      <string name="config_mms_user_agent">Android-Mms/2.0</string>
@@ -335,49 +354,73 @@
          rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max -->
      <string name="config_wifi_tcp_buffers">524288,1048576,5505024,262144,524288,4194304</string>
 
+    <!-- Array of desired screen brightness in nits corresponding to the lux values
+         in the config_autoBrightnessLevels array. As with config_screenBrightnessMinimumNits and
+         config_screenBrightnessMaximumNits, the display brightness is defined as the measured
+         brightness of an all-white image.
+         If this is defined then:
+            - config_autoBrightnessLcdBacklightValues should not be defined
+            - config_screenBrightnessNits must be defined
+            - config_screenBrightnessBacklight must be defined
+         This array should have size one greater than the size of the config_autoBrightnessLevels
+         array. The brightness values must be non-negative and non-decreasing. This must be
+         overridden in platform specific overlays -->
+    <integer-array name="config_autoBrightnessDisplayValuesNits">
+        <item>4</item>
+        <item>6</item>
+        <item>6</item>
+        <item>36</item>
+        <item>36</item>
+        <item>36</item>
+        <item>36</item>
+        <item>57</item>
+        <item>72</item>
+        <item>80</item>
+        <item>80</item>
+        <item>82</item>
+        <item>84</item>
+        <item>89</item>
+        <item>102</item>
+        <item>112</item>
+        <item>118</item>
+        <item>125</item>
+        <item>157</item>
+        <item>174</item>
+        <item>196</item>
+        <item>367</item>
+        <item>435</item>
+        <item>462</item>
+    </integer-array>
+
     <!-- Array of output values for LCD backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>3</item>
-        <item>3</item>
-        <item>3</item>
-        <item>8</item>
-        <item>8</item>
-        <item>8</item>
-        <item>8</item>
-        <item>12</item>
-        <item>12</item>
-        <item>18</item>
-        <item>18</item>
-        <item>18</item>
-        <item>27</item>
-        <item>27</item>
-        <item>27</item>
         <item>32</item>
-        <item>32</item>
-        <item>32</item>
-        <item>37</item>
-        <item>46</item>
-        <item>49</item>
-        <item>52</item>
-        <item>53</item>
-        <item>59</item>
-        <item>61</item>
-        <item>64</item>
-        <item>70</item>
-        <item>77</item>
-        <item>85</item>
-        <item>97</item>
-        <item>107</item>
-        <item>120</item>
-        <item>131</item>
-        <item>149</item>
-        <item>175</item>
-        <item>186</item>
-        <item>209</item>
-        <item>255</item>
+        <item>48</item>
+        <item>48</item>
+        <item>320</item>
+        <item>320</item>
+        <item>320</item>
+        <item>320</item>
+        <item>496</item>
+        <item>624</item>
+        <item>688</item>
+        <item>688</item>
+        <item>704</item>
+        <item>720</item>
+        <item>768</item>
+        <item>880</item>
+        <item>960</item>
+        <item>1008</item>
+        <item>1072</item>
+        <item>1344</item>
+        <item>1488</item>
+        <item>1680</item>
+        <item>3200</item>
+        <item>3840</item>
+        <item>4095</item>
     </integer-array>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
@@ -390,62 +433,28 @@
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
         <item>1</item>
-        <item>2</item>
-        <item>3</item>
         <item>4</item>
         <item>5</item>
-        <item>6</item>
-        <item>7</item>
         <item>8</item>
-        <item>10</item>
-        <item>12</item>
-        <item>15</item>
-        <item>18</item>
-        <item>22</item>
+        <item>13</item>
+        <item>17</item>
+        <item>21</item>
+        <item>26</item>
         <item>30</item>
-        <item>40</item>
-        <item>50</item>
-        <item>80</item>
-        <item>110</item>
-        <item>155</item>
-        <item>173</item>
-        <item>300</item>
-        <item>387</item>
-        <item>492</item>
-        <item>533</item>
-        <item>726</item>
-        <item>883</item>
-        <item>1023</item>
-        <item>1222</item>
-        <item>1501</item>
-        <item>1733</item>
-        <item>2034</item>
-        <item>2227</item>
-        <item>2517</item>
-        <item>3042</item>
-        <item>3495</item>
-        <item>3998</item>
-        <item>4472</item>
-    </integer-array>
-
-    <!-- Array of hysteresis constraint values for brightening, represented as tenths of a
-         percent. The length of this array is assumed to be one greater than
-         config_dynamicHysteresisLuxLevels. The brightening threshold is calculated as
-         lux * (1.0f + CONSTRAINT_VALUE). When the current lux is higher than this threshold,
-         the screen brightness is recalculated. See the config_dynamicHysteresisLuxLevels
-         description for how the constraint value is chosen. -->
-    <integer-array name="config_dynamicHysteresisBrightLevels">
-        <item>100</item>
-    </integer-array>
-
-    <!-- Array of hysteresis constraint values for darkening, represented as tenths of a
-         percent. The length of this array is assumed to be one greater than
-         config_dynamicHysteresisLuxLevels. The darkening threshold is calculated as
-         lux * (1.0f - CONSTRAINT_VALUE). When the current lux is lower than this threshold,
-         the screen brightness is recalculated. See the config_dynamicHysteresisLuxLevels
-         description for how the constraint value is chosen. -->
-    <integer-array name="config_dynamicHysteresisDarkLevels">
-        <item>200</item>
+        <item>34</item>
+        <item>39</item>
+        <item>60</item>
+        <item>140</item>
+        <item>310</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+        <item>1000</item>
+        <item>1200</item>
+        <item>1500</item>
+        <item>3000</item>
+        <item>3500</item>
+        <item>4000</item>
     </integer-array>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
@@ -502,26 +511,14 @@
         <item>/system/lib64/libblas.so</item>
     </string-array>
 
-    <!-- Values for GPS configuration -->
-    <string-array name="config_gpsParameters">
-        <item>SUPL_HOST=supl.google.com</item>
-        <item>SUPL_PORT=7275</item>
-        <item>SUPL_VER=0x20000</item>
-        <item>SUPL_MODE=1</item>
-        <item>SUPL_ES=1</item>
-        <item>LPP_PROFILE=0</item>
-        <item>USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL=1</item>
-        <item>A_GLONASS_POS_PROTOCOL_SELECT=0</item>
-        <item>GPS_LOCK=0</item>
-    </string-array>
-
     <!-- Configure mobile tcp buffer sizes in the form:
          rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
          If no value is found for the rat-name in use, the system default will be applied.
     -->
     <string-array name="config_mobile_tcp_buffers">
+        <item>5gnr:2097152,6291456,16777216,512000,2097152,8388608</item>
         <item>lte:2097152,4194304,8388608,262144,524288,1048576</item>
-        <item>lte_ca:2097152,4194304,8388608,4096,1048576,2097152</item>
+        <item>lte_ca:4096,6291456,12582912,4096,1048576,2097152</item>
         <item>umts:4094,87380,1220608,4096,16384,1220608</item>
         <item>hspa:4094,87380,1220608,4096,16384,1220608</item>
         <item>hsupa:4094,87380,1220608,4096,16384,1220608</item>
